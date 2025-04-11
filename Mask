@@ -1,0 +1,2 @@
+masked_a=np.ma.masked_equal(img,0.0,copy=True)
+plt.imshow(masked_a,'gray')
