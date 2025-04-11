@@ -1,0 +1,9 @@
+def preprocess(image):
+    # Use a smaller kernel (15x15) for less aggressive erosion
+    kernel = np.ones((15,15), np.uint8)
+    eroded_img = cv2.erode(image, kernel)
+    zeros_img = np.zeros(eroded_img.shape, dtype='uint8')
+    mask_of_eroded_img = np.ma.masked_where(eroded_img != 0, zeros_img, copy=True)
+    # Apply the mask to the original image (preserve pixels where the mask is True)
+    image = (mask_of_eroded_img.mask) * image
+    return image
